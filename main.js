@@ -67,11 +67,11 @@ function compareInputs(playerChoice, computerChoice) {
 
 function checkWinner() {
   if (playerScore === computerScore) {
-    alert("It was a Draw");
+    console.log("Draw");
   } else if (playerScore > computerScore) {
-    alert("YOU WON!");
+    console.log("YOU WON!");
   } else {
-    alert("YOU LOST!");
+    console.log("YOU LOST!");
   }
 }
 
@@ -92,8 +92,6 @@ function playAgain() {
   let play = confirm("Play again?");
   if (play) {
     game();
-  } else {
-    alert("Bye");
   }
 }
 
