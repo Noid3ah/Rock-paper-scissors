@@ -95,13 +95,13 @@ function game() {
 
 function playAgain() {
   let play = confirm("Play again?");
+  // can't figure out how to reset rounds and score
   if (play) {
     game();
   }
 }
 
 game();
-playAgain();
 // switch ((playerChoice, computerChoice)) {
 //   case playerChoice === computerChoice:
 //     console.log("It's a tie!");
