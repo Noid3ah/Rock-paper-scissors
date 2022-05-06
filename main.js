@@ -6,9 +6,9 @@
 // (input === "rock" || input === "paper" || input === "scissors")
 
 const choices = ["rock", "paper", "scissors"];
-let score = 0;
 let playerScore = 0;
 let computerScore = 0;
+
 let round = 0;
 
 function playerChoice() {
@@ -16,8 +16,8 @@ function playerChoice() {
   for (let i = 0; i < 5; i++) {
     if (input === "rock" || input === "paper" || input === "scissors") {
       // console.log(`Player: ${input}`);
-      break;
-    } else if (input == null) {
+      continue;
+    } else if (input === null) {
       break;
     } else {
       input = prompt("Incorrect spelling. Try again rock, paper or scissors");
@@ -35,28 +35,26 @@ function computerChoice() {
 
 function compareInputs(playerChoice, computerChoice) {
   if (playerChoice === computerChoice) {
-    console.log(
-      ` Round${round} It's a tie!. Score: ${playerScore}:${computerScore}`
-    );
+    console.log(` It's a tie!. Score: ${playerScore}:${computerScore}`);
   } else if (playerChoice === "rock" && computerChoice === "scissors") {
     playerScore++;
     console.log(
-      `Round${round} You won! ${playerChoice} beats ${computerChoice}. Score: ${playerScore}:${computerScore}`
+      `You won! ${playerChoice} beats ${computerChoice}. Score: ${playerScore}:${computerScore}`
     );
   } else if (playerChoice === "paper" && computerChoice === "rock") {
     playerScore++;
     console.log(
-      `Round${round} You won! ${playerChoice} beats ${computerChoice}. Score: ${playerScore}:${computerScore}`
+      `You won! ${playerChoice} beats ${computerChoice}. Score: ${playerScore}:${computerScore}`
     );
   } else if (playerChoice === "scissors" && computerChoice === "paper") {
     playerScore++;
     console.log(
-      `Round${round} You won! ${playerChoice} beats ${computerChoice}. Score: ${playerScore}:${computerScore}`
+      `You won! ${playerChoice} beats ${computerChoice}. Score: ${playerScore}:${computerScore}`
     );
   } else {
     computerScore++;
     console.log(
-      `Round${round} You lost! ${computerChoice} beats ${playerChoice}. ${playerScore}:${computerScore}`
+      `You lost! ${computerChoice} beats ${playerChoice}. Score: ${playerScore}:${computerScore}`
     );
   }
 }
@@ -67,7 +65,7 @@ function compareInputs(playerChoice, computerChoice) {
 
 function checkWinner() {
   if (playerScore === computerScore) {
-    console.log("Draw");
+    console.log("IT'S A DRAW!");
   } else if (playerScore > computerScore) {
     console.log("YOU WON!");
   } else {
@@ -78,11 +76,18 @@ function checkWinner() {
 function game() {
   for (let i = 0; i < 5; i++) {
     round++;
-    console.log(`Round ${round}`);
+    console.log(`Round:${round} ~`);
     compareInputs(playerChoice(), computerChoice());
+    // if (round === 5) {
+    //   round = 0;
+    //   playerScore = 0;
+    //   computerScore = 0;
+    //   playerScore++;
+
+    //   computerScore++;
+    // }
   }
   checkWinner(compareInputs());
-  playAgain();
 }
 
 // if game ends prompt play again?
@@ -96,7 +101,7 @@ function playAgain() {
 }
 
 game();
-
+playAgain();
 // switch ((playerChoice, computerChoice)) {
 //   case playerChoice === computerChoice:
 //     console.log("It's a tie!");
