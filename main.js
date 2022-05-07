@@ -76,6 +76,7 @@ function checkWinner() {
 function game() {
   for (let i = 0; i < 5; i++) {
     round++;
+
     console.log(`Round:${round} ~`);
     compareInputs(playerChoice(), computerChoice());
     // if (round === 5) {
@@ -102,6 +103,7 @@ function playAgain() {
 }
 
 game();
+
 // switch ((playerChoice, computerChoice)) {
 //   case playerChoice === computerChoice:
 //     console.log("It's a tie!");
