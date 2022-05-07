@@ -13,18 +13,17 @@ let round = 0;
 
 function playerChoice() {
   let input = prompt("Choose rock, paper or scissors:");
+  input = input.trim().toLowerCase();
   for (let i = 0; i < 5; i++) {
     if (input === "rock" || input === "paper" || input === "scissors") {
       // console.log(`Player: ${input}`);
-      continue;
-    } else if (input === null) {
-      break;
+      return input;
     } else {
-      input = prompt("Incorrect spelling. Try again rock, paper or scissors");
+      input = prompt("Invalid input. Try again: rock, paper or scissors?");
     }
   }
 
-  return input.trim().toLowerCase();
+  return input;
 }
 
 function computerChoice() {
@@ -35,7 +34,7 @@ function computerChoice() {
 
 function compareInputs(playerChoice, computerChoice) {
   if (playerChoice === computerChoice) {
-    console.log(` It's a tie!. Score: ${playerScore}:${computerScore}`);
+    console.log(`It's a tie!. Score: ${playerScore}:${computerScore}`);
   } else if (playerChoice === "rock" && computerChoice === "scissors") {
     playerScore++;
     console.log(
@@ -73,37 +72,43 @@ function checkWinner() {
   }
 }
 
+// loops 5 times and prints outputs to console
+
 function game() {
-  for (let i = 0; i < 5; i++) {
+  for (let i = 1; i <= 5; i++) {
     round++;
 
     console.log(`Round:${round} ~`);
     compareInputs(playerChoice(), computerChoice());
-    // if (round === 5) {
-    //   round = 0;
-    //   playerScore = 0;
-    //   computerScore = 0;
-    //   playerScore++;
-
-    //   computerScore++;
-    // }
   }
   checkWinner(compareInputs());
+}
+
+// if yes then pass game() else exit
+
+function play() {
+  let play = confirm("Do you want to play a few rounds?");
+  if (play) {
+    game();
+    playAgain();
+  }
 }
 
 // if game ends prompt play again?
 // if ok? play again else break
 
 function playAgain() {
-  let play = confirm("Play again?");
+  let playAgain = confirm("Play again?");
   // can't figure out how to reset rounds and score
-  if (play) {
+  if (playAgain) {
+    round = 0;
+    playerScore = 0;
+    computerScore = 0;
     game();
   }
 }
 
-game();
-
+play();
 // switch ((playerChoice, computerChoice)) {
 //   case playerChoice === computerChoice:
 //     console.log("It's a tie!");
