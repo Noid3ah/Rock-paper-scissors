@@ -4,7 +4,9 @@
 // create another fuction to loop 5 times over
 // pass results of 5 loops to another function to declare winner
 // (input === "rock" || input === "paper" || input === "scissors")
-
+const rock = document.querySelector('.rock');
+const paper = document.querySelector('.paper');
+const scissors = document.querySelector('.scissors');
 const choices = ["rock", "paper", "scissors"];
 let playerScore = 0;
 let computerScore = 0;
@@ -12,22 +14,14 @@ let computerScore = 0;
 let round = 0;
 
 function playerChoice() {
-  let input = prompt("Choose rock, paper or scissors:");
-  input = input.trim().toLowerCase();
-  for (let i = 0; i < 5; i++) {
-    if (input === "rock" || input === "paper" || input === "scissors") {
-      // console.log(`Player: ${input}`);
-      return input;
-    } else {
-      input = prompt("Invalid input. Try again: rock, paper or scissors?");
-    }
+  
   }
 
   return input;
 }
 
 function computerChoice() {
-  let compInput = choices[Math.floor(Math.random() * choices.length)];
+  let compInput = choices[Math.floor(Math.random() * choices.length + 1)];
   // console.log(`Computer: ${compInput}`);
   return compInput;
 }
@@ -97,18 +91,18 @@ function play() {
 // if game ends prompt play again?
 // if ok? play again else break
 
-function playAgain() {
-  let playAgain = confirm("Play again?");
-  // can't figure out how to reset rounds and score
-  if (playAgain) {
-    round = 0;
-    playerScore = 0;
-    computerScore = 0;
-    game();
-  }
-}
+// function playAgain() {
+//   let playAgain = confirm("Play again?");
+//   // can't figure out how to reset rounds and score
+//   if (playAgain) {
+//     round = 0;
+//     playerScore = 0;
+//     computerScore = 0;
+//     game();
+//   }
+// }
 
-play();
+// play();
 // switch ((playerChoice, computerChoice)) {
 //   case playerChoice === computerChoice:
 //     console.log("It's a tie!");
