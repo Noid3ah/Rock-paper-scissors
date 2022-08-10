@@ -15,6 +15,10 @@ const screen_img2 = document.querySelector(".screen__good");
 const newGame_modal = document.querySelector("#new__game");
 const newGame_button = document.querySelector(".newGame__btn");
 const W_L_or_D_h1 = document.querySelector(".game__outcome");
+const round_div = document.querySelector(".round");
+const round_span = document.querySelector(".round__span");
+const userFinalScore_span = document.querySelector(".final__user__score");
+const compFinalScore_span = document.querySelector(".final__comp__score");
 
 const choices = ["rock", "paper", "scissors"];
 
@@ -22,25 +26,17 @@ let playerScore = 0;
 let computerScore = 0;
 let round = 0;
 
-function overall(userScore, compScore) {
-  if (userScore === compScore) {
-    W_L_or_D_h1.innerHTML = "IT'S A DRAW";
-  } else if (userScore > compScore) {
-    W_L_or_D_h1.innerHTML = "WINNER";
-  }
-  return (W_L_or_D_h1.innerHTML = "YOU'VE LOST THE GAME");
-}
-
 function win(user, comp) {
   const borderColor = document.getElementById(user);
   playerScore++;
   round++;
   playerScore_span.innerText = playerScore;
+  round_span.innerText = round;
   user_span.innerText = `${user}`;
   comp_span.innerText = `${comp}`;
   user_span.style.color = "black";
   comp_span.style.color = "black";
-  outcome_div.innerText = "YOU WON!";
+  outcome_div.innerText = "WIN";
   outcome_div.setAttribute("style", "color:limegreen; font-size:1.5rem; ");
   borderColor.classList.add("user_win");
   setTimeout(() => borderColor.classList.remove("user_win"), 200);
@@ -51,11 +47,12 @@ function lose(user, comp) {
   computerScore++;
   round++;
   computerScore_span.innerText = computerScore;
+  round_span.innerHTML = round;
   user_span.innerText = `${user}`;
   comp_span.innerText = `${comp}`;
   user_span.style.color = "black";
   comp_span.style.color = "black";
-  outcome_div.innerText = "YOU LOST!";
+  outcome_div.innerText = "LOSE";
   outcome_div.setAttribute("style", "color:red; font-size:1.5rem;");
   borderColor.classList.add("user_lose");
   setTimeout(() => borderColor.classList.remove("user_lose"), 200);
@@ -66,11 +63,12 @@ function draw(user, comp) {
   round++;
   playerScore_span.innerText = playerScore;
   computerScore_span.innerText = computerScore;
+  round_span.innerHTML = round;
   user_span.innerText = `${user}`;
   comp_span.innerText = `${comp}`;
   user_span.style.color = "black";
   comp_span.style.color = "black";
-  outcome_div.innerText = "DRAW!";
+  outcome_div.innerText = "DRAW";
   outcome_div.setAttribute("style", "color:grey; font-size:1.5rem;");
   borderColor.classList.add("user_draw");
   setTimeout(() => borderColor.classList.remove("user_draw"), 200);
@@ -118,12 +116,11 @@ function computerChoice() {
 }
 
 function resetGame() {
-  // playerScore = 0;
-  // computerScore = 0;
-  // round = 0;
   playerScore_span.innerText = playerScore;
   computerScore_span.innerText = computerScore;
   outcome_div.innerText = "";
+  userFinalScore_span.innerText = playerScore;
+  compFinalScore_span.innerText = computerScore;
 
   if (playerScore === computerScore) {
     W_L_or_D_h1.innerHTML = "IT'S A DRAW!";
@@ -141,6 +138,7 @@ function resetGame() {
     round = 0;
     playerScore_span.innerText = playerScore;
     computerScore_span.innerText = computerScore;
+    round_span.innerText = "";
     user_span.innerText = "";
     comp_span.innerText = "";
     outcome_div.innerText = "";

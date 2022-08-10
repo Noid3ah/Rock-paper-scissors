@@ -134,6 +134,13 @@ body {
   max-width: 50px;
   cursor: pointer;
 }
+.round {
+  color: black;
+}
+.round__span {
+  color: black;
+  margin-left: 0.5rem;
+}
 
 .box {
   display: flex;
@@ -252,7 +259,25 @@ body {
 }
 .game__outcome {
   color: var(--primary-clr);
-  margin-bottom: 1rem;
+  /* margin-bottom: 2rem; */
+  font-size: 2.5rem;
+}
+.final-score {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+.final__user__score,
+.final__comp__score {
+  color: var(--accent-clr);
+  font-size: 3rem;
+}
+.final__score__line {
+  background-color: var(--primary-clr);
+  height: 5px;
+  width: 20px;
+  margin-inline: 1rem;
 }
 .newgame-wrap_btn {
   display: flex;
@@ -264,6 +289,9 @@ body {
   font-weight: bold;
 }
 
+/* -------------------------------- */
+/* -----------media query---------- */
+/* -------------------------------- */
 @media screen and (min-width: 600px) {
   .row {
     display: flex;
@@ -449,9 +477,21 @@ body {
 
   .game__outcome {
     color: var(--primary-clr);
-    margin-bottom: 2rem;
-    font-size: 3rem;
-    text-shadow: rgba(255, 255, 255, 0.3) 0px 0px 4px;
+    margin-bottom: 0rem;
+    font-size: 3.5rem;
+    text-shadow: rgba(0, 0, 0, 0.5) 0px 0px 4px;
+  }
+  .final-score {
+    color: var(--primary-clr);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .final__user__score,
+  .final__comp__score {
+    color: var(--accent-clr);
+    font-size: 3.5rem;
+    font-weight: bold;
   }
 }
 .screen__good {
