@@ -93,7 +93,7 @@ function game(userChoice) {
       draw(userChoice, computer);
       break;
   }
-  if (round === 5) {
+  if (playerScore === 5 || computerScore === 5) {
     resetGame();
   }
 }
@@ -152,6 +152,7 @@ function reset() {
     round = 0;
     playerScore_span.innerText = playerScore;
     computerScore_span.innerText = computerScore;
+    round_span.innerText = "";
     user_span.innerText = "";
     comp_span.innerText = "";
     outcome_div.innerText = "";
