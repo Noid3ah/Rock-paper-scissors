@@ -1,122 +1,121 @@
-// get player input
-// get computer input
-// pass inputs to a fuction to compare input
-// create another fuction to loop 5 times over
-// pass results of 5 loops to another function to declare winner
-// (input === "rock" || input === "paper" || input === "scissors")
-const rock = document.querySelector('.rock');
-const paper = document.querySelector('.paper');
-const scissors = document.querySelector('.scissors');
+const rock_div = document.querySelector("#rock");
+const paper_div = document.querySelector("#paper");
+const scissors_div = document.querySelector("#scissors");
+const playerScore_span = document.querySelector(".player__score");
+const computerScore_span = document.querySelector(".computer__score");
+const user_span = document.querySelector("#userr");
+const comp_span = document.querySelector("#compp");
+const outcome_div = document.querySelector(".outcome");
+const resetGame_button = document.querySelector(".reset__btn");
+const help_button = document.querySelector(".help__btn");
+const openModal_dialog = document.querySelector("#modal");
+const closeModal_button = document.querySelector(".close__modal");
+
 const choices = ["rock", "paper", "scissors"];
+
 let playerScore = 0;
 let computerScore = 0;
 
-let round = 0;
-
-function playerChoice() {
-  
-  }
-
-  return input;
+function win(user, comp) {
+  const borderColor = document.getElementById(user);
+  playerScore++;
+  playerScore_span.innerText = playerScore;
+  user_span.innerText = `${user}`;
+  comp_span.innerText = `${comp}`;
+  user_span.style.color = "black";
+  comp_span.style.color = "black";
+  outcome_div.innerText = "YOU WON!";
+  outcome_div.setAttribute("style", "color:limegreen; font-size:1.5rem; ");
+  borderColor.classList.add("user_win");
+  setTimeout(() => borderColor.classList.remove("user_win"), 200);
 }
 
+function lose(user, comp) {
+  const borderColor = document.getElementById(user);
+  computerScore++;
+  computerScore_span.innerText = computerScore;
+  user_span.innerText = `${user}`;
+  comp_span.innerText = `${comp}`;
+  user_span.style.color = "black";
+  comp_span.style.color = "black";
+  outcome_div.innerText = "YOU LOST!";
+  outcome_div.setAttribute("style", "color:red; font-size:1.5rem;");
+  borderColor.classList.add("user_lose");
+  setTimeout(() => borderColor.classList.remove("user_lose"), 200);
+}
+
+function draw(user, comp) {
+  const borderColor = document.getElementById(user);
+  playerScore_span.innerText = playerScore;
+  computerScore_span.innerText = computerScore;
+  user_span.innerText = `${user}`;
+  comp_span.innerText = `${comp}`;
+  user_span.style.color = "black";
+  comp_span.style.color = "black";
+  outcome_div.innerText = "DRAW!";
+  outcome_div.setAttribute("style", "color:grey; font-size:1.5rem;");
+  borderColor.classList.add("user_draw");
+  setTimeout(() => borderColor.classList.remove("user_draw"), 200);
+}
+
+function game(userChoice) {
+  const computer = computerChoice();
+  switch (userChoice + " " + computer) {
+    case "rock scissors":
+    case "paper rock":
+    case "scissors paper":
+      win(userChoice, computer);
+      break;
+    case "rock paper":
+    case "paper scissors":
+    case "scissors rock":
+      lose(userChoice, computer);
+      break;
+    case "rock rock":
+    case "paper paper":
+    case "scissors scissors":
+      draw(userChoice, computer);
+      break;
+  }
+}
+
+function playerChoice() {
+  rock_div.addEventListener("click", () => {
+    game("rock");
+  });
+  paper_div.addEventListener("click", () => {
+    game("paper");
+  });
+  scissors_div.addEventListener("click", () => {
+    game("scissors");
+  });
+}
+playerChoice();
+
 function computerChoice() {
-  let compInput = choices[Math.floor(Math.random() * choices.length + 1)];
-  // console.log(`Computer: ${compInput}`);
+  let compInput = choices[Math.floor(Math.random() * choices.length)];
   return compInput;
 }
 
-function compareInputs(playerChoice, computerChoice) {
-  if (playerChoice === computerChoice) {
-    console.log(`It's a tie!. Score: ${playerScore}:${computerScore}`);
-  } else if (playerChoice === "rock" && computerChoice === "scissors") {
-    playerScore++;
-    console.log(
-      `You won! ${playerChoice} beats ${computerChoice}. Score: ${playerScore}:${computerScore}`
-    );
-  } else if (playerChoice === "paper" && computerChoice === "rock") {
-    playerScore++;
-    console.log(
-      `You won! ${playerChoice} beats ${computerChoice}. Score: ${playerScore}:${computerScore}`
-    );
-  } else if (playerChoice === "scissors" && computerChoice === "paper") {
-    playerScore++;
-    console.log(
-      `You won! ${playerChoice} beats ${computerChoice}. Score: ${playerScore}:${computerScore}`
-    );
-  } else {
-    computerScore++;
-    console.log(
-      `You lost! ${computerChoice} beats ${playerChoice}. Score: ${playerScore}:${computerScore}`
-    );
-  }
+function reset() {
+  resetGame_button.addEventListener("click", () => {
+    playerScore = 0;
+    computerScore = 0;
+    playerScore_span.innerText = playerScore;
+    computerScore_span.innerText = computerScore;
+    user_span.innerText = "";
+    comp_span.innerText = "";
+    outcome_div.innerText = "";
+  });
 }
+reset();
 
-// compare wins function: if playerscore > computerscore player wins else computer wins
-// if firstround; round = 1
-// if player beats computer;  score = 1:0
-
-function checkWinner() {
-  if (playerScore === computerScore) {
-    console.log("IT'S A DRAW!");
-  } else if (playerScore > computerScore) {
-    console.log("YOU WON!");
-  } else {
-    console.log("YOU LOST!");
-  }
+function helpDialog() {
+  help_button.addEventListener("click", () => {
+    openModal_dialog.showModal();
+  });
+  closeModal_button.addEventListener("click", () => {
+    openModal_dialog.close();
+  });
 }
-
-// loops 5 times and prints outputs to console
-
-function game() {
-  for (let i = 1; i <= 5; i++) {
-    round++;
-
-    console.log(`Round:${round} ~`);
-    compareInputs(playerChoice(), computerChoice());
-  }
-  checkWinner(compareInputs());
-}
-
-// if yes then pass game() else exit
-
-function play() {
-  let play = confirm("Do you want to play a few rounds?");
-  if (play) {
-    game();
-    playAgain();
-  }
-}
-
-// if game ends prompt play again?
-// if ok? play again else break
-
-// function playAgain() {
-//   let playAgain = confirm("Play again?");
-//   // can't figure out how to reset rounds and score
-//   if (playAgain) {
-//     round = 0;
-//     playerScore = 0;
-//     computerScore = 0;
-//     game();
-//   }
-// }
-
-// play();
-// switch ((playerChoice, computerChoice)) {
-//   case playerChoice === computerChoice:
-//     console.log("It's a tie!");
-//     break;
-
-//   case playerChoice === "rock" && computerChoice === "scissors":
-//     console.log(`You won! ${playerChoice} beats ${computerChoice}`);
-//     break;
-
-//   case playerChoice === "paper" && computerChoice === "rock":
-//     console.log(`You won! ${playerChoice} beats ${computerChoice}`);
-//     break;
-
-//   case playerChoice === "scissors" && computerChoice === "paper":
-//     console.log(`You won! ${playerChoice} beats ${computerChoice}`);
-//     break;
-// }
+helpDialog();
