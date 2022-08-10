@@ -12,15 +12,29 @@ const openModal_dialog = document.querySelector("#modal");
 const closeModal_button = document.querySelector(".close__modal");
 const screen_img = document.querySelector(".screen__evil");
 const screen_img2 = document.querySelector(".screen__good");
+const newGame_modal = document.querySelector("#new__game");
+const newGame_button = document.querySelector(".newGame__btn");
+const W_L_or_D_h1 = document.querySelector(".game__outcome");
 
 const choices = ["rock", "paper", "scissors"];
 
 let playerScore = 0;
 let computerScore = 0;
+let round = 0;
+
+function overall(userScore, compScore) {
+  if (userScore === compScore) {
+    W_L_or_D_h1.innerHTML = "IT'S A DRAW";
+  } else if (userScore > compScore) {
+    W_L_or_D_h1.innerHTML = "WINNER";
+  }
+  return (W_L_or_D_h1.innerHTML = "YOU'VE LOST THE GAME");
+}
 
 function win(user, comp) {
   const borderColor = document.getElementById(user);
   playerScore++;
+  round++;
   playerScore_span.innerText = playerScore;
   user_span.innerText = `${user}`;
   comp_span.innerText = `${comp}`;
@@ -35,6 +49,7 @@ function win(user, comp) {
 function lose(user, comp) {
   const borderColor = document.getElementById(user);
   computerScore++;
+  round++;
   computerScore_span.innerText = computerScore;
   user_span.innerText = `${user}`;
   comp_span.innerText = `${comp}`;
@@ -48,6 +63,7 @@ function lose(user, comp) {
 
 function draw(user, comp) {
   const borderColor = document.getElementById(user);
+  round++;
   playerScore_span.innerText = playerScore;
   computerScore_span.innerText = computerScore;
   user_span.innerText = `${user}`;
@@ -79,6 +95,9 @@ function game(userChoice) {
       draw(userChoice, computer);
       break;
   }
+  if (round === 5) {
+    resetGame();
+  }
 }
 
 function playerChoice() {
@@ -92,17 +111,34 @@ function playerChoice() {
     game("scissors");
   });
 }
-playerChoice();
 
 function computerChoice() {
   let compInput = choices[Math.floor(Math.random() * choices.length)];
   return compInput;
 }
 
-function reset() {
-  resetGame_button.addEventListener("click", () => {
+function resetGame() {
+  // playerScore = 0;
+  // computerScore = 0;
+  // round = 0;
+  playerScore_span.innerText = playerScore;
+  computerScore_span.innerText = computerScore;
+  outcome_div.innerText = "";
+
+  if (playerScore === computerScore) {
+    W_L_or_D_h1.innerHTML = "IT'S A DRAW!";
+  } else if (playerScore > computerScore) {
+    W_L_or_D_h1.innerHTML = "WINNER!!!";
+  } else {
+    W_L_or_D_h1.innerHTML = "YOU'VE LOST!";
+  }
+
+  newGame_modal.showModal();
+  newGame_button.addEventListener("click", () => {
+    newGame_modal.close();
     playerScore = 0;
     computerScore = 0;
+    round = 0;
     playerScore_span.innerText = playerScore;
     computerScore_span.innerText = computerScore;
     user_span.innerText = "";
@@ -110,7 +146,19 @@ function reset() {
     outcome_div.innerText = "";
   });
 }
-reset();
+
+function reset() {
+  resetGame_button.addEventListener("click", () => {
+    playerScore = 0;
+    computerScore = 0;
+    round = 0;
+    playerScore_span.innerText = playerScore;
+    computerScore_span.innerText = computerScore;
+    user_span.innerText = "";
+    comp_span.innerText = "";
+    outcome_div.innerText = "";
+  });
+}
 
 function helpDialog() {
   help_button.addEventListener("click", () => {
@@ -120,7 +168,6 @@ function helpDialog() {
     openModal_dialog.close();
   });
 }
-helpDialog();
 
 screen_img.addEventListener("click", () => {
   screen_img.classList.add("evil_img");
@@ -130,3 +177,11 @@ screen_img2.addEventListener("click", () => {
   screen_img2.classList.remove("good_img");
   screen_img.classList.remove("evil_img");
 });
+
+function play() {
+  playerChoice();
+  reset();
+  helpDialog();
+}
+
+play();
