@@ -261,6 +261,7 @@ body {
 }
 .newGame__btn {
   background-color: var(--accent-clr2);
+  font-weight: bold;
 }
 
 @media screen and (min-width: 600px) {
