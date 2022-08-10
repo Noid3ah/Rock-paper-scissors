@@ -10,6 +10,8 @@ const resetGame_button = document.querySelector(".reset__btn");
 const help_button = document.querySelector(".help__btn");
 const openModal_dialog = document.querySelector("#modal");
 const closeModal_button = document.querySelector(".close__modal");
+const screen_img = document.querySelector(".screen__evil");
+const screen_img2 = document.querySelector(".screen__good");
 
 const choices = ["rock", "paper", "scissors"];
 
@@ -119,3 +121,12 @@ function helpDialog() {
   });
 }
 helpDialog();
+
+screen_img.addEventListener("click", () => {
+  screen_img.classList.add("evil_img");
+  screen_img2.classList.add("good_img");
+});
+screen_img2.addEventListener("click", () => {
+  screen_img2.classList.remove("good_img");
+  screen_img.classList.remove("evil_img");
+});
