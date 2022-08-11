@@ -54,6 +54,7 @@ img {
 
 body {
   font-family: "poppins";
+  background-color: rgba(231, 223, 189, 0.875);
 }
 
 .container {
@@ -255,7 +256,7 @@ body {
 
 .new__game::backdrop {
   background: black;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 .game__outcome {
   color: var(--primary-clr);

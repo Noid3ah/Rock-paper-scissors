@@ -37,6 +37,8 @@ function win(user, comp) {
   user_span.style.color = "black";
   comp_span.style.color = "black";
   outcome_div.innerText = "WIN";
+  userFinalScore_span.setAttribute("style", "color:#1f88e9;");
+  compFinalScore_span.setAttribute("style", "color: #d64343;");
   outcome_div.setAttribute("style", "color:limegreen; font-size:1.5rem; ");
   borderColor.classList.add("user_win");
   setTimeout(() => borderColor.classList.remove("user_win"), 200);
@@ -53,6 +55,8 @@ function lose(user, comp) {
   user_span.style.color = "black";
   comp_span.style.color = "black";
   outcome_div.innerText = "LOSE";
+  userFinalScore_span.setAttribute("style", "color: #d64343;");
+  compFinalScore_span.setAttribute("style", "color:#1f88e9;");
   outcome_div.setAttribute("style", "color:red; font-size:1.5rem;");
   borderColor.classList.add("user_lose");
   setTimeout(() => borderColor.classList.remove("user_lose"), 200);
@@ -69,6 +73,8 @@ function draw(user, comp) {
   user_span.style.color = "black";
   comp_span.style.color = "black";
   outcome_div.innerText = "DRAW";
+  userFinalScore_span.setAttribute("style", "color: #1f88e9;");
+  compFinalScore_span.setAttribute("style", "color: #1f88e9;");
   outcome_div.setAttribute("style", "color:grey; font-size:1.5rem;");
   borderColor.classList.add("user_draw");
   setTimeout(() => borderColor.classList.remove("user_draw"), 200);
